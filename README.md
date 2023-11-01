@@ -1,8 +1,10 @@
-# Practice Challenge: Flatiron Pizza
+# Practice Challenge: Pizza
 
-![Pizza Screen Recording](https://curriculum-content.s3.amazonaws.com/react/pizza.gif)
+This is a student challenge I worked on while learning React.
 
-Welcome to your first day at the Flatiron Pizzeria!
+## Intro
+
+Welcome to your first day at the Pizzeria!
 
 Today, you are tasked to building an online menu of all the pizzas that the
 pizzeria offers.
