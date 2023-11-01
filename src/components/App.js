@@ -6,9 +6,9 @@ import PizzaList from "./PizzaList";
 function App() {
   const [pizzas,setPizzas]=useState([]);
   const [pizzaForm,setPizzaForm]=useState({
-    topping: "Pepperoni",
-    size: "Medium",
-    vegetarian: "veg"
+    topping: "",
+    size: "Any",
+    vegetarian: "any"
   });
   const getData=()=>{
     fetch('http://localhost:3001/pizzas'

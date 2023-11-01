@@ -32,13 +32,13 @@ function Pizza(props) {
   const savePizzaAndToggle = ()=>{
     console.log(`save pizza ${tempPizza.id} ${tempPizza.topping} ${tempPizza.size} ${tempPizza.vegetarian}`)
     const response = fetch(`http://localhost:3001/pizzas/${props.id}`, {      // 
-      Method: 'PATCH',
-      Headers: {
+      method: 'PATCH',
+      headers: {
         Accept: 'application.json',
         'Content-Type': 'application/json'
       },
-      Body: JSON.stringify(tempPizza),
-      Cache: 'default'
+      body: JSON.stringify(tempPizza),
+      cache: 'default'
     });
     console.log(response)
     setEditable(!editable);
