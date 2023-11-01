@@ -65,14 +65,14 @@ function Pizza(props) {
             onChange={changeTopping}
           /></td>
         <td>
-          <select className="form-control" name="size-edit" selected={tempPizza.size} onChange={changeSize}>
+          <select className="form-control" name="size-edit" value={tempPizza.size} onChange={changeSize}>
             <option value="Small">Small</option>
             <option value="Medium">Medium</option>
             <option value="Large">Large</option>
           </select>
         </td>
         <td>
-          <select className="form-control" name="vegetarian-edit" selected={tempPizza.vegetarian} onChange={changeVeg}>
+          <select className="form-control" name="vegetarian-edit" value={tempPizza.vegetarian} onChange={changeVeg}>
             <option value="veg">Vegetarian</option>
             <option value="non-veg">Non-Vegetarian</option>
           </select>
@@ -90,8 +90,8 @@ function Pizza(props) {
   else
     return (
       <tr>
-        <td>{props.topping}</td>
-        <td>{props.size}</td>
+        <td>{tempPizza.topping}</td>
+        <td>{tempPizza.size}</td>
         <td>{props.vegetarian.toString()}</td>
         <td>
           <button type="button" className="btn btn-primary" onClick={()=>setEditable(!editable)}>
