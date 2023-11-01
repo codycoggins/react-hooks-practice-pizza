@@ -6,13 +6,16 @@ function Pizza(props) {
     id: props.id,
     topping: props.topping,
     size: props.size,
-    vegetarian: props.vegetarian
+    // translate db true/false into form "veg"/"non-veg"
+    vegetarian: props.vegetarian ? "veg" : "non-veg"
   });
+  console.log(`tempPizza: ${tempPizza.id} ${tempPizza.topping} ${tempPizza.size} ${tempPizza.vegetarian}`)
   const changeVeg = ((e) => {
-    console.log(`changeVeg ${e.target.id}`);
+    console.log(`changeVeg ${e.target.value}`);
     setTempPizza({
       ...tempPizza,
-      vegetarian: e.target.id
+      // translate form true/false into db "veg"/"non-veg"
+      vegetarian: e.target.value
     })
   });
   const changeTopping = ((e) => {
@@ -30,14 +33,21 @@ function Pizza(props) {
     })
   })
   const savePizzaAndToggle = ()=>{
-    console.log(`save pizza ${tempPizza.id} ${tempPizza.topping} ${tempPizza.size} ${tempPizza.vegetarian}`)
+    console.log(`save tempPizza ${tempPizza.id} ${tempPizza.topping} ${tempPizza.size} ${tempPizza.vegetarian}`)
+    // Make a copy of pizza in the save format, which is different than what we get from the form.
+    const savePizza = {
+        ...tempPizza,
+        // translate form true/false into db "veg"/"non-veg"
+        vegetarian: (tempPizza.vegetarian==="veg") ? true : false
+    }
+    console.log(`save savePizza ${savePizza.id} ${savePizza.topping} ${savePizza.size} ${savePizza.vegetarian}`)
     const response = fetch(`http://localhost:3001/pizzas/${props.id}`, {      // 
       method: 'PATCH',
       headers: {
         Accept: 'application.json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(tempPizza),
+      body: JSON.stringify(savePizza),
       cache: 'default'
     });
     console.log(response)
@@ -49,23 +59,30 @@ function Pizza(props) {
         <td><input
             className="form-control"
             type="text"
-            name="topping"
+            name="topping-edit"
             placeholder="Pizza Topping"
             value={tempPizza.topping}
             onChange={changeTopping}
           /></td>
         <td>
-          <select className="form-control" name="size" selected={tempPizza.size} onChange={changeSize}>
+          <select className="form-control" name="size-edit" selected={tempPizza.size} onChange={changeSize}>
             <option value="Small">Small</option>
             <option value="Medium">Medium</option>
             <option value="Large">Large</option>
-            <option value="Any">Any</option>
           </select>
         </td>
-        <td>{props.vegetarian.toString()}</td>
+        <td>
+          <select className="form-control" name="vegetarian-edit" selected={tempPizza.vegetarian} onChange={changeVeg}>
+            <option value="veg">Vegetarian</option>
+            <option value="non-veg">Non-Vegetarian</option>
+          </select>
+        </td>
         <td>
         <button type="button" className="btn btn-primary" onClick={savePizzaAndToggle}>
             Save
+        </button>
+        <button type="button" className="btn btn-primary" onClick={()=>setEditable(!editable)}>
+            Cancel
         </button>
         </td>
       </tr>

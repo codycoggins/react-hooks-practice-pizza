@@ -27,6 +27,7 @@ function PizzaForm(props) {
   return (
     <form onSubmit={null /*handle that submit*/}>
       <div className="form-row">
+        <div>Filter:</div>
         <div className="col-5">
           <input
             className="form-control"
